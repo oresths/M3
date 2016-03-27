@@ -1,15 +1,22 @@
 #include "mbed.h"
-#include "USBSerial.h"
 #include "rtos.h"
 
-DigitalOut myled(LED1);
+#include "servo.hpp"
+#include "detector.hpp"
+
+#include "USBSerial.h"
+
 
 int main() {
-    while(1) {
-        printf("Hello World!\r\n");
-        myled = 1;
-        wait(0.2);
-        myled = 0;
-        wait(0.2);
-    }
+
+    ServoInit(D5);
+
+    DetectorInit(D3);
+
+    Thread tServoCaller(ServoSchedulerTask);
+
+    Thread tDetectorCaller(DetectorSchedulerTask);
+
+
+    Thread::wait(osWaitForever);
 }
