@@ -19,11 +19,11 @@ void ServoSchedulerTask(void const *args) {
 
         servoPWM->pulsewidth_us(1400);
 
-        Thread::wait(500);
+        Thread::wait(1500);
 
-        servoPWM->pulsewidth_us(1600);
+        servoPWM->pulsewidth_us(1550);
 
-        Thread::wait(500);
+        Thread::wait(1500);
     }
 }
 

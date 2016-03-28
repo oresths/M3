@@ -12,6 +12,7 @@ DigitalOut myled(LED1);
 
 uint8_t item_count = 0;
 
+
 void DetectorInit(PinName rx) {
     detector1 = new InterruptIn(rx);
     detector1->rise(&rise_isr);
@@ -37,6 +38,7 @@ void fall_isr() {
 }
 
 void DetectorSchedulerTask(void const *args) {
+
     while (true) {
 
         printf("Items passed: %d\n\r", item_count);
