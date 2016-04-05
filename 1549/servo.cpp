@@ -14,6 +14,7 @@ void ServoInit(PinName tx) {
     servoPWM->pulsewidth_us(1500);
 }
 
+//TODO when the final servo - motor configuration is decided, make speed-direction function
 void ServoSchedulerTask(void const *args) {
     while (true) {
 
