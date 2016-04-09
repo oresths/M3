@@ -11,9 +11,11 @@
 #include "mbed.h"
 #include "rtos.h"
 
-void ServoInit(PinName tx);
+void ServoInit(PinName tx, Serial* serial_obj);
 
-void ServoSchedulerTask(void const *args);
+void RX_isr();
+
+void ServoReceiverTask(void const *args);
 
 
 #endif /* SERVO_HPP_ */

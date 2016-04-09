@@ -63,9 +63,12 @@ void standby() {
     stby->write(0); //enable standby
 }
 
-//TODO when the final servo - motor configuration is decided, make speed-direction function
 void HbridgeSchedulerTask(void const *args) {
     while (true) {
+
+        standby();
+
+        Thread::wait(1500);
 
         move(0, 0.1, 0);
         move(1, 0.1, 0);
@@ -77,8 +80,8 @@ void HbridgeSchedulerTask(void const *args) {
 
         Thread::wait(1500);
 
-        move(0, 0.2, 0);
-        move(1, 0.2, 0);
+        move(0, 0.9, 1);
+        move(1, 0.9, 1);
 
         Thread::wait(3000);
     }

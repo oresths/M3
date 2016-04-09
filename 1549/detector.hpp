@@ -13,13 +13,18 @@
 
 #define ITEM_PRESENT_HIGH 1  //1 for high active
 
-void DetectorInit(PinName rx);
+#define DETECTOR_SIGNAL 0x1
+
+#define DETECTOR1 'A' //A
+
+
+void DetectorInit(PinName rx, Serial* serial_obj);
 
 void rise_isr();
 
 void fall_isr();
 
-void DetectorSchedulerTask(void const *args);
+void DetectorTask(void const *args);
 
 
 #endif /* DETECTOR_HPP_ */
