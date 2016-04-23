@@ -10,7 +10,7 @@ static PwmOut *servoPWM;
 
 static Serial *servo_uart;
 
-static Queue<uint8_t, 19> servo_rx_queue;
+static Queue<uint8_t, 5> servo_rx_queue;
 
 void ServoInit(PinName tx, Serial* serial_obj) {
     servoPWM = new PwmOut(tx);
@@ -33,7 +33,9 @@ void ServoReceiverTask(void const *args) {
         osEvent evt = servo_rx_queue.get();   //If queue empty, stops here and lets other threads run
         int recv_char = evt.value.v;    //Received character
 
-        servo_uart->putc(recv_char); //TODO delete, only for debug purposes
+#if DEBUG
+        servo_uart->putc(recv_char);
+#endif
 
         if (direction) {
             servoPWM->pulsewidth_us(1400);

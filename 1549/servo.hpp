@@ -11,6 +11,8 @@
 #include "mbed.h"
 #include "rtos.h"
 
+#define DEBUG 1
+
 void ServoInit(PinName tx, Serial* serial_obj);
 
 void RX_isr();
