@@ -65,9 +65,11 @@ void DetectorTask(void const *args) {
         osEvent evt = detector_rx_queue.get();   //If queue empty, stops here and lets other threads run
         int recv_char = evt.value.v;    //Received character
 
+#if DEBUG
+        printf("Items passed: %d\n\r", item_count);
+#else
         detector_uart->putc(recv_char);
-
-//        printf("Items passed: %d\n\r", item_count);
+#endif
     }
 }
 

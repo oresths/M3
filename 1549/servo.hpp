@@ -11,7 +11,7 @@
 #include "mbed.h"
 #include "rtos.h"
 
-#define DEBUG 1
+#define DEBUG 0
 
 void ServoInit(PinName tx, Serial* serial_obj);
 

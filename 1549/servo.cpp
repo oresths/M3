@@ -27,7 +27,6 @@ void RX_isr() {
 }
 
 void ServoReceiverTask(void const *args) {
-//    servoPWM->pulsewidth_us(1400);
     uint8_t direction = 0;
     while (true) {
         osEvent evt = servo_rx_queue.get();   //If queue empty, stops here and lets other threads run
