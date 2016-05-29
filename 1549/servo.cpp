@@ -32,7 +32,7 @@ void ServoReceiverTask(void const *args) {
         osEvent evt = servo_rx_queue.get();   //If queue empty, stops here and lets other threads run
         int recv_char = evt.value.v;    //Received character
 
-#if DEBUG
+#if DEBUG_S
         servo_uart->putc(recv_char);
 #endif
 

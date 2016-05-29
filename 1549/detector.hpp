@@ -13,7 +13,7 @@
 
 #define ITEM_PRESENT_HIGH 0  //1 for high active detection pulse
 
-#define DEBUG 0
+#define DEBUG_D 0
 
 #define DETECTOR1 '1'
 #define DETECTOR2 '2'

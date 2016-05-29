@@ -21,7 +21,7 @@ static Serial* detector_uart;
 
 static Thread* detector_thread;
 
-#if DEBUG
+#if DEBUG_D
 DigitalOut myled(LED1);
 
 uint8_t item_count = 0;
@@ -65,7 +65,7 @@ void DetectorTask(void const *args) {
         osEvent evt = detector_rx_queue.get();   //If queue empty, stops here and lets other threads run
         int recv_char = evt.value.v;    //Received character
 
-#if DEBUG
+#if DEBUG_D
         printf("Items passed: %d\n\r", item_count);
 #else
         detector_uart->putc(recv_char);
@@ -76,16 +76,28 @@ void DetectorTask(void const *args) {
 void rise_isr1() {
     if (ITEM_PRESENT_HIGH) { //what to do when item gets IN detection
         detector_rx_queue.put((uint8_t *) DETECTOR1);
+#if DEBUG_D
+        myled = 0; //leds low active
+        item_count += 1;
+#endif
     } else { //what to do when item gets OUT of detection
-
+#if DEBUG_D
+        myled = 1; //leds low active
+#endif
     }
 }
 
 void fall_isr1() {
     if (!ITEM_PRESENT_HIGH) { //what to do when item gets IN detection
         detector_rx_queue.put((uint8_t *) DETECTOR1);
+#if DEBUG_D
+        myled = 0; //leds low active
+        item_count += 1;
+#endif
     } else { //what to do when item gets OUT of detection
-
+#if DEBUG_D
+        myled = 1; //leds low active
+#endif
     }
 }
 
@@ -124,28 +136,16 @@ void fall_isr3() {
 void rise_isr4() {
     if (ITEM_PRESENT_HIGH) { //what to do when item gets IN detection
         detector_rx_queue.put((uint8_t *) DETECTOR4);
-#if DEBUG
-        myled = 0; //leds low active
-        item_count += 1;
-#endif
     } else { //what to do when item gets OUT of detection
-#if DEBUG
-        myled = 1; //leds low active
-#endif
+
     }
 }
 
 void fall_isr4() {
     if (!ITEM_PRESENT_HIGH) { //what to do when item gets IN detection
         detector_rx_queue.put((uint8_t *) DETECTOR4);
-#if DEBUG
-        myled = 0; //leds low active
-        item_count += 1;
-#endif
     } else { //what to do when item gets OUT of detection
-#if DEBUG
-        myled = 1; //leds low active
-#endif
+
     }
 }
 
